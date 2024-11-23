@@ -1,52 +1,31 @@
-import { Action, ActionPanel, Clipboard, Form, Icon, showToast, Toast, useNavigation } from "@raycast/api";
-import { FormValidation, useForm } from "@raycast/utils";
-import { SwiftType } from "./json2Swift/swiftConvert";
-import { ResultDetailView } from "./utils/resultView";
-
-
-interface FormValues {
-  jsonValue: string;
-  swiftType: SwiftType;
-}
+import { Form } from "@raycast/api";
+import { SwiftType, Types } from "./utils/types";
+import { InputJSON } from "./utils/inputJSONView";
 
 export default function Command() {
-  const { push } = useNavigation();
-  const {handleSubmit, itemProps} = useForm<FormValues>({
-    onSubmit(values) {
-      // handle swift conversion
-
-      push(<ResultDetailView result={values.jsonValue + values.swiftType} />)
-    },
-
-    validation: {
-      jsonValue: FormValidation.Required
-    }
-  })
-
-  const renderActions = () => {
-    const generateAction = () => {
-      return <Action.SubmitForm
-              title="Generate"
-              onSubmit={(values) => {
-                handleSubmit({...values} as FormValues)
-              }}
-              />
-    }
-    
-    return (
-    <ActionPanel.Section>
-    {generateAction()}
-    </ActionPanel.Section>)
-  };  
-
-
-  return ( 
-    <Form actions={<ActionPanel>{renderActions()}</ActionPanel>}>
-      <Form.TextArea id="jsonValue" title="JSON" placeholder="Enter JSON" autoFocus/>
+  const extraNode = (
+    <Form>
       <Form.Dropdown id="swiftType" title="Swift" storeValue>
         <Form.Dropdown.Item value={SwiftType.Struct} title="Struct" />
         <Form.Dropdown.Item value={SwiftType.Class} title="Class" />
       </Form.Dropdown>
     </Form>
+  );
+
+  return (
+    <InputJSON
+      navTitle="JSON to Swift"
+      actionTitle="Generate"
+      type={Types.Swift}
+      onConvert={async (values) => {
+        if (values.option === SwiftType.Struct) {
+          // handle struct conversion
+        } else if (values.option === SwiftType.Class) {
+          // handle class conversion
+        }
+        return "result";
+      }}
+      extraNode={extraNode}
+    />
   );
 }
