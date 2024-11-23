@@ -1,7 +1,7 @@
 import { Action, ActionPanel, Clipboard, Form, Icon, showToast, Toast, useNavigation } from "@raycast/api";
 import { FormValidation, useForm } from "@raycast/utils";
 import { SwiftType } from "./json2Swift/swiftConvert";
-import { ResultDetailView } from "./resultView";
+import { ResultDetailView } from "./utils/resultView";
 
 
 interface FormValues {
@@ -14,7 +14,7 @@ export default function Command() {
   const {handleSubmit, itemProps} = useForm<FormValues>({
     onSubmit(values) {
       // handle swift conversion
-      
+
       push(<ResultDetailView result={values.jsonValue + values.swiftType} />)
     },
 
