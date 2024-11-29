@@ -1,31 +1,32 @@
 import { Form } from "@raycast/api";
-import { SwiftType, Types } from "./utils/types";
+import { formatJson } from "./jsonFormat/formatConvert";
 import { InputJSON } from "./utils/inputJSONView";
+import { SwiftType, Types } from "./utils/types";
+import { convertSwift } from "./json2Swift/swiftConvert";
 
 export default function Command() {
-  const extraNode = (
-    <Form>
-      <Form.Dropdown id="swiftType" title="Swift" storeValue>
-        <Form.Dropdown.Item value={SwiftType.Struct} title="Struct" />
-        <Form.Dropdown.Item value={SwiftType.Class} title="Class" />
-      </Form.Dropdown>
-    </Form>
-  );
+  function swiftTypeForm() {
+    return (
+        <Form.Dropdown id="option" title="Type" storeValue>
+          <Form.Dropdown.Item value={SwiftType.Struct} title="Struct" />
+          <Form.Dropdown.Item value={SwiftType.Class} title="Class" />
+        </Form.Dropdown>
+    )
+  }
 
-  return (
-    <InputJSON
-      navTitle="JSON to Swift"
-      actionTitle="Generate"
-      type={Types.Swift}
-      onConvert={async (values) => {
-        if (values.option === SwiftType.Struct) {
-          // handle struct conversion
-        } else if (values.option === SwiftType.Class) {
-          // handle class conversion
-        }
-        return "result";
-      }}
-      extraNode={extraNode}
-    />
-  );
+  function swiftRootName() {
+    return (
+        <Form.TextField id="name" defaultValue="User" title="Root Name"/>
+    )
+  }
+
+    return (
+        <InputJSON
+            navTitle="JSON to Swift"
+            actionTitle="Generate"
+            type={Types.Swift}
+            onConvert={async (values) => await convertSwift(values.jsonValue, values.option as SwiftType, values.name ?? "User")}
+            extraNode={[swiftTypeForm(), swiftRootName()]}
+        />
+    )
 }

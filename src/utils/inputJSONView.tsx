@@ -2,6 +2,7 @@ import { Action, ActionPanel, Form, useNavigation } from "@raycast/api";
 import { InputJsonFormValues, InputJsonProps } from "./types";
 import { FormValidation, useForm } from "@raycast/utils";
 import { ResultDetailView } from "./resultView";
+import React from "react";
 
 
 export function InputJSON({navTitle, actionTitle, type, onConvert, extraNode}: InputJsonProps) {
@@ -41,7 +42,11 @@ export function InputJSON({navTitle, actionTitle, type, onConvert, extraNode}: I
             actions={<ActionPanel>{renderAction()}</ActionPanel>}
         >
             <Form.TextArea id="jsonValue" title="JSON" placeholder="Enter your JSON here"  autoFocus/>
-            {extraNode}
+            {extraNode && extraNode.map((node, index) => (
+                <React.Fragment key={index}>
+                    {node}
+                </React.Fragment>
+            ))}
         </Form>
     )
 }

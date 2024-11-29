@@ -15,8 +15,8 @@ export enum ObjectiveCType {
 
 export interface InputJsonFormValues {
     jsonValue: string;
-    type: Types;
     option?: SwiftType | ObjectiveCType;
+    name?: string; // json convert class root name
 }
 
 
@@ -25,5 +25,5 @@ export interface InputJsonProps {
     actionTitle: string;
     type: Types;
     onConvert: (values: InputJsonFormValues) => Promise<string | null>;
-    extraNode?: React.ReactNode;
+    extraNode?: React.ReactNode[];
 }
