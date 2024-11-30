@@ -1,3 +1,5 @@
+import { Value } from "quicktype-core";
+
 export enum Types {
     JSON = "JSON",
     Swift = "Swift",
@@ -17,6 +19,7 @@ export interface InputJsonFormValues {
     jsonValue: string;
     option?: SwiftType | ObjectiveCType;
     name?: string; // json convert class root name
+    prefix?: string; // objective-c class prefix
 }
 
 
@@ -26,4 +29,5 @@ export interface InputJsonProps {
     type: Types;
     onConvert: (values: InputJsonFormValues) => Promise<string | null>;
     extraNode?: React.ReactNode[];
+    onChange?: (value: string) => void;
 }

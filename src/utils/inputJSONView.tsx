@@ -5,7 +5,8 @@ import { ResultDetailView } from "./resultView";
 import React from "react";
 
 
-export function InputJSON({navTitle, actionTitle, type, onConvert, extraNode}: InputJsonProps) {
+export function InputJSON({navTitle, actionTitle, type, onConvert, extraNode, onChange}: InputJsonProps) {
+    const jsonValueOnChange = onChange ?? (() => {});
     const { push } = useNavigation();
     const { handleSubmit } = useForm<InputJsonFormValues>({
         onSubmit: async (values) => {
@@ -41,7 +42,13 @@ export function InputJSON({navTitle, actionTitle, type, onConvert, extraNode}: I
             navigationTitle={navTitle}
             actions={<ActionPanel>{renderAction()}</ActionPanel>}
         >
-            <Form.TextArea id="jsonValue" title="JSON" placeholder="Enter your JSON here"  autoFocus/>
+            <Form.TextArea 
+                id="jsonValue" 
+                title="JSON" 
+                placeholder="Enter your JSON here" 
+                autoFocus
+                onChange={(value) => jsonValueOnChange(value)}
+            />
             {extraNode && extraNode.map((node, index) => (
                 <React.Fragment key={index}>
                     {node}

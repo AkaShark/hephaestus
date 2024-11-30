@@ -1,3 +1,4 @@
+import { jsonRootName } from "../utils/jsonRootName";
 import { SwiftType } from "../utils/types";
 import {
     quicktype,
@@ -5,11 +6,15 @@ import {
     jsonInputForTargetLanguage,
 } from "quicktype-core";
 
-export async function convertSwift(jsonValue: string, type: SwiftType, name: string) {
+export async function convertSwift(jsonValue: string, type: SwiftType, name?: string) {
+    let rootName = name;
+    if (!rootName) {
+        rootName = jsonRootName(jsonValue);
+    }
     if (type === SwiftType.Struct) {
-        return await convertSwiftStruct(jsonValue, name, SwiftType.Struct);
+        return await convertSwiftStruct(jsonValue, rootName, SwiftType.Struct);
     } else if (type === SwiftType.Class) {
-        return await convertSwiftClass(jsonValue, name, SwiftType.Class);
+        return await convertSwiftClass(jsonValue, rootName, SwiftType.Class);
     }
     return null;
 }
