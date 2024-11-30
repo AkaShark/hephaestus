@@ -27,6 +27,12 @@
       "title": "jsonFormat",
       "description": "Format and beautify JSON content",
       "mode": "view"
+    },
+    {
+      "name": "json2Typescript",
+      "title": "json2Typescript",
+      "description": "Convert JSON to Typescript",
+      "mode": "view"
     }
   ],
   "dependencies": {

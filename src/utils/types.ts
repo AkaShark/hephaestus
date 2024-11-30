@@ -4,6 +4,7 @@ export enum Types {
     JSON = "JSON",
     Swift = "Swift",
     ObjectiveC = "ObjectiveC",
+    TypeScript = "TypeScript",
 }
 
 export enum SwiftType {
