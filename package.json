@@ -3,7 +3,7 @@
   "name": "hephaestus",
   "title": "Hephaestus - JSON Tools",
   "description": "A collection of useful developer tools and utilities, including JSON to Swift, Objective-C, TypeScript, and more.",
-  "icon": "extension-icon.png",
+  "icon": "icon.png",
   "author": "sharker_alice_sharker",
   "categories": [
     "Developer Tools"

@@ -18,7 +18,12 @@ export default function Command() {
   }
 
   function swiftRootName() {
-    return <Form.TextField id="name" value={rootName} title="Root Name" />;
+    return <Form.TextField 
+      id="name" 
+      value={rootName} 
+      title="Root Name" 
+      onChange={(value) => setRootName(value)}
+    />;
   }
 
   return (

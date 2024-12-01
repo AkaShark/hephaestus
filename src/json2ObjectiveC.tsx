@@ -9,7 +9,12 @@ export default function Command() {
   const [rootName, setRootName] = useState("");
 
   function objectiveCRootName() {
-    return <Form.TextField id="name" value={rootName} title="Root Name" />;
+    return <Form.TextField 
+      id="name" 
+      value={rootName} 
+      title="Root Name" 
+      onChange={(value) => setRootName(value)}
+    />;
   }
 
   function objectiveCPrefix() {
