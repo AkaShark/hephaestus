@@ -1,5 +1,3 @@
-import { Value } from "quicktype-core";
-
 export enum Types {
   JSON = "JSON",
   Swift = "Swift",
