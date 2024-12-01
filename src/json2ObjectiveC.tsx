@@ -6,31 +6,26 @@ import { useState } from "react";
 import { jsonRootName } from "./utils/jsonRootName";
 
 export default function Command() {
-    const [rootName, setRootName] = useState("");
+  const [rootName, setRootName] = useState("");
 
-    function objectiveCRootName() {
-        return (
-            <Form.TextField id="name" value={rootName} title="Root Name"/>
-        )
-    }
+  function objectiveCRootName() {
+    return <Form.TextField id="name" value={rootName} title="Root Name" />;
+  }
 
-    function objectiveCPrefix() {
-        return (
-            <Form.TextField id="prefix" defaultValue="" title="Prefix"/>
-        )
-    }
+  function objectiveCPrefix() {
+    return <Form.TextField id="prefix" defaultValue="" title="Prefix" />;
+  }
 
-    return (
-        <InputJSON
-            navTitle="JSON to Objective-C"
-            actionTitle="Generate"
-            type={Types.ObjectiveC}
-            onConvert={async (value) => await convertObjectiveC(value.jsonValue, value.prefix, value.name)}
-            extraNode={[objectiveCPrefix(), objectiveCRootName()]}
-            onChange={(value) => {
-                setRootName(jsonRootName(value));
-            }}
-        />
-    )
+  return (
+    <InputJSON
+      navTitle="JSON to Objective-C"
+      actionTitle="Generate"
+      type={Types.ObjectiveC}
+      onConvert={async (value) => await convertObjectiveC(value.jsonValue, value.prefix, value.name)}
+      extraNode={[objectiveCPrefix(), objectiveCRootName()]}
+      onChange={(value) => {
+        setRootName(jsonRootName(value));
+      }}
+    />
+  );
 }
-

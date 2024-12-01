@@ -10,29 +10,27 @@ export default function Command() {
 
   function swiftTypeForm() {
     return (
-        <Form.Dropdown id="option" title="Type" storeValue>
-          <Form.Dropdown.Item value={SwiftType.Struct} title="Struct" />
-          <Form.Dropdown.Item value={SwiftType.Class} title="Class" />
-        </Form.Dropdown>
-    )
+      <Form.Dropdown id="option" title="Type" storeValue>
+        <Form.Dropdown.Item value={SwiftType.Struct} title="Struct" />
+        <Form.Dropdown.Item value={SwiftType.Class} title="Class" />
+      </Form.Dropdown>
+    );
   }
 
   function swiftRootName() {
-    return (
-        <Form.TextField id="name" value={rootName} title="Root Name"/>
-    )
+    return <Form.TextField id="name" value={rootName} title="Root Name" />;
   }
 
-    return (
-        <InputJSON
-            navTitle="JSON to Swift"
-            actionTitle="Generate"
-            type={Types.Swift}
-            onConvert={async (values) => await convertSwift(values.jsonValue, values.option as SwiftType, values.name)}
-            extraNode={[swiftTypeForm(), swiftRootName()]}
-            onChange={(value) => {
-              setRootName(jsonRootName(value));
-            }}
-        />
-    )
+  return (
+    <InputJSON
+      navTitle="JSON to Swift"
+      actionTitle="Generate"
+      type={Types.Swift}
+      onConvert={async (values) => await convertSwift(values.jsonValue, values.option as SwiftType, values.name)}
+      extraNode={[swiftTypeForm(), swiftRootName()]}
+      onChange={(value) => {
+        setRootName(jsonRootName(value));
+      }}
+    />
+  );
 }
